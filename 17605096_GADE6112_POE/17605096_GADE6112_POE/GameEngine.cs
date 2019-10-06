@@ -32,7 +32,7 @@ namespace _17605096_GADE6112_POE
             map.Display(GBMap, x, y);
             roundnum = 1;
         }
-        public void Update()
+        public void Update(int x, int y)
         {
             for (int i = 0; i < map.Units.Count; i++)
             {

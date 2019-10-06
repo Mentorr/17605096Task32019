@@ -33,7 +33,7 @@ namespace _17605096_GADE6112_POE
         private void Timer1_Tick(object sender, EventArgs e)
         {
             lblRoundSim.Text = "Round: " + engine.RoundNum.ToString();
-            engine.Update();
+            engine.Update(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text));
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -55,7 +55,7 @@ namespace _17605096_GADE6112_POE
         private void Timer1_Tick_1(object sender, EventArgs e)
         {
             lblRoundSim.Text = "Round: " + engine.RoundNum.ToString();
-            engine.Update();
+            engine.Update(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text));
             
         }
 
