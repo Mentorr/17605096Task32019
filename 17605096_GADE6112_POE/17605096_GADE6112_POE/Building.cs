@@ -19,5 +19,6 @@ namespace _17605096_GADE6112_POE
         public abstract override string ToString();
         public abstract void Save();
         public abstract void Combat(Unit other);
+        public abstract (Unit, int) Closest(List<Unit> units);
     }
 }

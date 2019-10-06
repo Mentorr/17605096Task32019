@@ -18,6 +18,7 @@ namespace _17605096_GADE6112_POE
         Map map;
         Random r = new Random();
         List<Unit> units;
+        Unit un;
         string output;
 
         public bool IsDead { get; set; }
@@ -138,5 +139,53 @@ namespace _17605096_GADE6112_POE
                 MessageBox.Show("Error Occured " + exc.Message);
             }        
         }
+        public override void Combat(Unit other)
+        {
+            if (other is MeleeUnit)
+            {
+                Health = Health - ((MeleeUnit)other).Attack;
+            }
+            else if (other is RangedUnit)
+            {
+                RangedUnit ru = (RangedUnit)other;
+                Health = Health - (ru.Attack - ru.Attackrange);
+            }
+            if (Health <= 0)
+            {
+                Death();
+            }
+        }
+        public override (Unit, int) Closest(List<Unit> units)
+        {
+            int shortest = 100;
+            Unit closest = (Unit)un;
+            foreach (Unit u in units)
+            {
+                if (u is MeleeUnit && u != un)
+                {
+                    MeleeUnit otherMU = (MeleeUnit)u;
+                    int distance = Math.Abs(this.Xpos - otherMU.Xpos) + Math.Abs(this.Ypos = otherMU.Ypos);
+                    if (distance < shortest)
+                    {
+                        shortest = distance; ;
+                        closest = otherMU;
+                    }
+                }
+                else if (u is RangedUnit && u != un)
+                {
+
+                    RangedUnit otherRU = (RangedUnit)u;
+                    int distance = Math.Abs(this.Xpos - otherRU.Xpos) + Math.Abs(this.Ypos - otherRU.Ypos);
+
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherRU;
+                    }
+                }
+            }
+            return (closest, shortest);
+        }
+
     }
 }

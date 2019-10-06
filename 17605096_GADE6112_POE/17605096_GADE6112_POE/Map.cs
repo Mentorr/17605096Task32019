@@ -15,6 +15,22 @@ namespace _17605096_GADE6112_POE
     [Serializable]
     public class Map
     {
+        private int x;
+
+        public int X
+        {
+            get { return x; }
+            set { x = value; }
+        }
+        private int y;
+
+        public int Y
+        {
+            get { return y; }
+            set { y = value; }
+        }
+
+
         List<Unit> units;
         Random r = new Random();
         int numUnits = 0;
@@ -89,9 +105,10 @@ namespace _17605096_GADE6112_POE
             }    
         }
 
-        public void Display(GroupBox groupBox)
+        public void Display(GroupBox groupBox, int x,int y)     //int x and y are to determine size of grid
         {
-            groupBox.Controls.Clear();
+            groupBox.Controls.Clear(); 
+            groupBox.Size = new Size(x,y);
             foreach (Unit u in units)
             {
                 Button b = new Button();

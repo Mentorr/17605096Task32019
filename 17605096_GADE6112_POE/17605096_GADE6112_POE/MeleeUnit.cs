@@ -120,8 +120,6 @@ namespace _17605096_GADE6112_POE
                 RangedUnit ru = (RangedUnit)attacker;                   //if ATTACKER is RANGEDUNIT, minus HEALTH by ATTACKER'S ATTACK
                 Health = Health - (ru.Attack - ru.Attackrange);         //HEALTH is minused by (ATTACK DAMAGE - The range they are at)
             }
-            
-
             if (Health <= 0)
             {
                 Death();

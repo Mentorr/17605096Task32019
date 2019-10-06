@@ -1,4 +1,6 @@
-﻿namespace _17605096_GADE6112_POE
+﻿using System;
+
+namespace _17605096_GADE6112_POE
 {
     partial class Form1
     {
@@ -37,6 +39,10 @@
             this.GBMap = new System.Windows.Forms.GroupBox();
             this.BtnSave = new System.Windows.Forms.Button();
             this.BtnRead = new System.Windows.Forms.Button();
+            this.txtX = new System.Windows.Forms.TextBox();
+            this.txtY = new System.Windows.Forms.TextBox();
+            this.xsize = new System.Windows.Forms.Label();
+            this.ysize = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnStartSim
@@ -107,9 +113,48 @@
             this.BtnRead.UseVisualStyleBackColor = true;
             this.BtnRead.Click += new System.EventHandler(this.BtnRead_Click);
             // 
+            // txtX
+            // 
+            this.txtX.Location = new System.Drawing.Point(571, 160);
+            this.txtX.Name = "txtX";
+            this.txtX.Size = new System.Drawing.Size(74, 20);
+            this.txtX.TabIndex = 7;
+            this.txtX.Text = "552";
+            // 
+            // txtY
+            // 
+            this.txtY.Location = new System.Drawing.Point(571, 199);
+            this.txtY.Name = "txtY";
+            this.txtY.Size = new System.Drawing.Size(74, 20);
+            this.txtY.TabIndex = 8;
+            this.txtY.Text = "474";
+            // 
+            // xsize
+            // 
+            this.xsize.AutoSize = true;
+            this.xsize.Location = new System.Drawing.Point(570, 144);
+            this.xsize.Name = "xsize";
+            this.xsize.Size = new System.Drawing.Size(37, 13);
+            this.xsize.TabIndex = 9;
+            this.xsize.Text = "X Size";
+            this.xsize.Click += new System.EventHandler(this.Label1_Click);
+            // 
+            // ysize
+            // 
+            this.ysize.AutoSize = true;
+            this.ysize.Location = new System.Drawing.Point(572, 183);
+            this.ysize.Name = "ysize";
+            this.ysize.Size = new System.Drawing.Size(37, 13);
+            this.ysize.TabIndex = 10;
+            this.ysize.Text = "Y Size";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(888, 499);
+            this.Controls.Add(this.ysize);
+            this.Controls.Add(this.xsize);
+            this.Controls.Add(this.txtY);
+            this.Controls.Add(this.txtX);
             this.Controls.Add(this.BtnRead);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.GBMap);
@@ -124,6 +169,11 @@
 
         }
 
+        private void Label1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
         private System.Windows.Forms.Button BtnStartSim;
         private System.Windows.Forms.Button BtnPauseSim;
@@ -133,6 +183,10 @@
         private System.Windows.Forms.GroupBox GBMap;
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Button BtnRead;
+        private System.Windows.Forms.TextBox txtX;
+        private System.Windows.Forms.TextBox txtY;
+        private System.Windows.Forms.Label xsize;
+        private System.Windows.Forms.Label ysize;
     }
 }
 

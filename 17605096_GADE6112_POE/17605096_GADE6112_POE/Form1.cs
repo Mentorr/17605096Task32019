@@ -18,8 +18,6 @@ namespace _17605096_GADE6112_POE
         FactoryBuilding fb;
 
         Map map;
-
-
         public Form1()
         {
                 InitializeComponent();
@@ -39,12 +37,14 @@ namespace _17605096_GADE6112_POE
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            engine = new GameEngine(20, 5, txtInfo, GBMap);
+            engine = new GameEngine(20, 5, txtInfo, GBMap, Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text));
         }
 
         private void BtnStartSim_Click(object sender, EventArgs e)
         {
             Timer1.Enabled = true;
+            int xgroup = Convert.ToInt32(txtX.Text);
+            int ygroup = Convert.ToInt32(txtY.Text);
         }
 
         private void BtnPauseSim_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace _17605096_GADE6112_POE
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
-            engine = new GameEngine(20, 5, txtInfo, GBMap);
+            engine = new GameEngine(20, 5, txtInfo, GBMap, Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text));
         }
         
         private void BtnSave_Click(object sender, EventArgs e)

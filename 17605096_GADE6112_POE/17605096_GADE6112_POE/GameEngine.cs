@@ -12,6 +12,8 @@ namespace _17605096_GADE6112_POE
     [Serializable]
     class GameEngine
     {
+        int x;
+        int y;
         Map map;
         private int roundnum;
         Random r = new Random();
@@ -22,15 +24,12 @@ namespace _17605096_GADE6112_POE
             get { return roundnum; }
         }
 
-        public GameEngine(int numUnits, int numBuildings, TextBox txtInfo, GroupBox GMap)
+        public GameEngine(int numUnits, int numBuildings, TextBox txtInfo, GroupBox GMap, int x, int y)
         {
             GBMap = GMap;
             map = new Map(numUnits, numBuildings, txtInfo);
             map.Generate();
-            map.Display(GBMap);
-            
-            
-
+            map.Display(GBMap, x, y);
             roundnum = 1;
         }
         public void Update()
@@ -155,8 +154,18 @@ namespace _17605096_GADE6112_POE
                         }
                     }
                 }
+                else if(map.Buildings[i] is FactoryBuilding)
+                {
+                    FactoryBuilding fb = (FactoryBuilding)map.Buildings[i];
+                    (Unit closest, int distanceTo) = fb.Closest(map.Units);
+
+                    if(distanceTo <= 2)
+                    {
+                        fb.Combat(closest);
+                    }
+                }
             }
-            map.Display(GBMap);
+            map.Display(GBMap,x,y);
             roundnum++;
         }
 
