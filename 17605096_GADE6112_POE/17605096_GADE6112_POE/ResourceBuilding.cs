@@ -16,6 +16,7 @@ namespace _17605096_GADE6112_POE
     {
         Map map;
         Unit un;
+        FactoryBuilding fb;
         public bool IsDead { get; set; }
 
         public int Xpos
@@ -53,10 +54,23 @@ namespace _17605096_GADE6112_POE
         private int ResPR;          //Resources Per Round
         private int ResRem;         //Resources Remaining
 
+        public ResourceBuilding(int x, int y, int h, int f, string symb)
+        {
+            Xpos = x;
+            Ypos = y;
+            Health = h;
+            Faction = f;
+            Symbol = symb;
+        }
         public void ResGenerate()
         {
             ResGen += ResPR;
             ResRem -= ResPR;
+
+            while(ResRem>=0)
+            {
+                fb.UnitProduce(5);
+            }
         }
         public override void Death()
         {

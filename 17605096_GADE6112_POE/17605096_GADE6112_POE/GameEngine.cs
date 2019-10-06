@@ -18,6 +18,7 @@ namespace _17605096_GADE6112_POE
         private int roundnum;
         Random r = new Random();
         GroupBox GBMap;
+        FactoryBuilding fb;
 
         public int RoundNum
         {
@@ -32,7 +33,7 @@ namespace _17605096_GADE6112_POE
             map.Display(GBMap, x, y);
             roundnum = 1;
         }
-        public void Update(int x, int y)
+        public void Update(int x, int y, int temp)
         {
             for (int i = 0; i < map.Units.Count; i++)
             {
@@ -90,6 +91,26 @@ namespace _17605096_GADE6112_POE
                                     mu.Move(3);
                                 }
                                 else if (mu.Ypos < closestRu.Ypos)
+                                {
+                                    mu.Move(1);
+                                }
+                            }
+                            else if(closest is WizardUnit)
+                            {
+                                WizardUnit closestwu = (WizardUnit)closest;
+                                if(mu.Xpos > closestwu.Xpos)
+                                {
+                                    mu.Move(0);
+                                }
+                                else if(mu.Xpos < closestwu.Xpos)
+                                {
+                                    mu.Move(2);
+                                }
+                                else if(mu.Ypos > closestwu.Ypos)
+                                {
+                                    mu.Move(3);
+                                }
+                                else if(mu.Ypos < closestwu.Ypos)
                                 {
                                     mu.Move(1);
                                 }
@@ -152,9 +173,104 @@ namespace _17605096_GADE6112_POE
                                 ru.Move(1);
                             }
                         }
+                        else if(closest is WizardUnit)
+                        {
+                            WizardUnit closestwu = (WizardUnit)closest;
+                            if(ru.Xpos > closestwu.Xpos)
+                            {
+                                ru.Move(0);
+                            }
+                            else if(ru.Xpos < closestwu.Xpos)
+                            {
+                                ru.Move(2);
+                            }
+                            else if(ru.Ypos > closestwu.Ypos)
+                            {
+                                ru.Move(3);
+                            }
+                            else if(ru.Ypos < closestwu.Ypos)
+                            {
+                                ru.Move(1);
+                            }
+                        }
                     }
                 }
-                else if(map.Buildings[i] is FactoryBuilding)
+                else if(map.Units[i] is WizardUnit)
+                {
+                    WizardUnit wu = (WizardUnit)map.Units[i];
+
+                    (Unit closest, int distanceto) = wu.Closest(map.Units);
+                    
+                    if(distanceto <= wu.Attackrange)
+                    {
+                        wu.isAttacking = true;
+                        wu.Combat(closest);
+                    }
+                    else
+                    {
+                        if(closest is MeleeUnit)
+                        {
+                            MeleeUnit closestmu = (MeleeUnit)closest;
+                            if(wu.Xpos > closestmu.Xpos)
+                            {
+                                wu.Move(0);
+                            }
+                            else if(wu.Xpos < closestmu.Xpos)
+                            {
+                                wu.Move(2);
+                            }
+                            else if(wu.Ypos > closestmu.Ypos)
+                            {
+                                wu.Move(3);
+                            }
+                            else if(wu.Ypos < closestmu.Ypos)
+                            {
+                                wu.Move(1);
+                            }
+                        }
+                        else if(closest is RangedUnit)
+                        {
+                            RangedUnit closestru = (RangedUnit)closest;
+                            if(wu.Xpos > closestru.Xpos)
+                            {
+                                wu.Move(0);
+                            }
+                            else if (wu.Xpos < closestru.Xpos)
+                            {
+                                wu.Move(2);
+                            }
+                            else if(wu.Ypos > closestru.Ypos)
+                            {
+                                wu.Move(3);
+                            }
+                            else if (wu.Ypos < closestru.Ypos)
+                            {
+                                wu.Move(1);
+                            }
+                        }
+                        else if(closest is WizardUnit)
+                        {
+                            WizardUnit closestwu = (WizardUnit)closest;
+                            if(wu.Xpos > closestwu.Xpos)
+                            {
+                                wu.Move(0);
+                            }
+                            else if(wu.Xpos < closestwu.Xpos)
+                            {
+                                wu.Move(2);
+                            }
+                            else if(wu.Ypos > closestwu.Ypos)
+                            {
+                                wu.Move(3);
+                            }
+                            else if(wu.Ypos < closestwu.Ypos)
+                            {
+                                wu.Move(1);
+                            }
+                        }
+                    }
+                }
+                /*if(map.Buildings[i] is FactoryBuilding)
                 {
                     FactoryBuilding fb = (FactoryBuilding)map.Buildings[i];
                     (Unit closest, int distanceTo) = fb.Closest(map.Units);
@@ -163,10 +279,19 @@ namespace _17605096_GADE6112_POE
                     {
                         fb.Combat(closest);
                     }
-                }
+                }*/
             }
             map.Display(GBMap,x,y);
             roundnum++;
+            int genspeed = 5;
+            temp++;
+            if(temp == genspeed)
+            {
+                fb.UnitProduce(genspeed);
+            }
+            
+            
+
         }
 
         public int DistanceTo(Unit a, Unit b)
@@ -195,6 +320,18 @@ namespace _17605096_GADE6112_POE
             {
                 MeleeUnit start = (MeleeUnit)a;
                 RangedUnit end = (RangedUnit)b;
+                distance = Math.Abs(start.Xpos - end.Xpos) + Math.Abs(start.Ypos - end.Ypos);
+            }
+            else if(a is MeleeUnit && b is WizardUnit)
+            {
+                MeleeUnit start = (MeleeUnit)a;
+                WizardUnit end = (WizardUnit)b;
+                distance = Math.Abs(start.Xpos - end.Xpos) + Math.Abs(start.Ypos - end.Ypos);
+            }
+            else if(a is RangedUnit && b is WizardUnit)
+            {
+                RangedUnit start = (RangedUnit)a;
+                WizardUnit end = (WizardUnit)b;
                 distance = Math.Abs(start.Xpos - end.Xpos) + Math.Abs(start.Ypos - end.Ypos);
             }
             return distance;

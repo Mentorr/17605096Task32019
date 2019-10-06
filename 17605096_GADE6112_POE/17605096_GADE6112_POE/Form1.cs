@@ -16,6 +16,7 @@ namespace _17605096_GADE6112_POE
     {
         GameEngine engine;
         FactoryBuilding fb;
+        int temp = 1;
 
         Map map;
         public Form1()
@@ -33,7 +34,7 @@ namespace _17605096_GADE6112_POE
         private void Timer1_Tick(object sender, EventArgs e)
         {
             lblRoundSim.Text = "Round: " + engine.RoundNum.ToString();
-            engine.Update(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text));
+            engine.Update(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text),temp);
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -55,7 +56,7 @@ namespace _17605096_GADE6112_POE
         private void Timer1_Tick_1(object sender, EventArgs e)
         {
             lblRoundSim.Text = "Round: " + engine.RoundNum.ToString();
-            engine.Update(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text));
+            engine.Update(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text),temp);
             
         }
 

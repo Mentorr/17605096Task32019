@@ -62,6 +62,7 @@ namespace _17605096_GADE6112_POE
 
         public void Generate()
         {
+           // int rng = r.Next(0, 2);
             for (int i = 0; i < numUnits; i++)
             {
                 if (r.Next(0, 2) == 0)
@@ -75,7 +76,7 @@ namespace _17605096_GADE6112_POE
                                                 "M", "Grunt");
                     units.Add(m);
                 }
-                else
+                else if(r.Next(0,2) == 1)
                 {
                     RangedUnit ru = new RangedUnit(r.Next(0, 20),
                                                 r.Next(0, 20),
@@ -87,20 +88,38 @@ namespace _17605096_GADE6112_POE
                                                 "R", "Archer");
                     units.Add(ru);
                 }
+                else
+                {
+                    WizardUnit wu = new WizardUnit(r.Next(0, 20),
+                                                   r.Next(0, 20),
+                                                   100,
+                                                   1,
+                                                   20,
+                                                   10,
+                                                   (i % 2 == 0 ? 1 : 0),
+                                                   "W", "Wizard");
+                    units.Add(wu);
+                }
             }
             for (int i = 0; i < numBuildings; i++)
             {
                 if(r.Next(0,2) == 0)
+                {                    
+                     FactoryBuilding fb = new FactoryBuilding(r.Next(0, 20),
+                                                              r.Next(0, 20),
+                                                              200,
+                                                              r.Next(0, 2),
+                                                              "F");
+                     buildings.Add(fb);                    
+                }
+                else
                 {
-                    {
-                        FactoryBuilding fb = new FactoryBuilding(r.Next(0, 20),
-                                                                 r.Next(0, 20),
-                                                                 200,
-                                                                 r.Next(0, 2),
-                                                                 "F");
-                        buildings.Add(fb);
-                        fb.UnitProduce();
-                    }
+                    ResourceBuilding rb = new ResourceBuilding(r.Next(0, 20),
+                                                               r.Next(0, 20),
+                                                               200,
+                                                               r.Next(0, 2),
+                                                               "RB");
+                    buildings.Add(rb);
                 }
             }    
         }
@@ -127,7 +146,7 @@ namespace _17605096_GADE6112_POE
                         b.ForeColor = Color.Green;
                     }
                 }
-                else
+                else if (u is RangedUnit)
                 {
                     RangedUnit ru = (RangedUnit)u;
                     b.Size = new Size(20, 20);
@@ -141,6 +160,14 @@ namespace _17605096_GADE6112_POE
                     {
                         b.ForeColor = Color.Green;
                     }
+                }
+                else if(u is WizardUnit)
+                {
+                    WizardUnit wu = (WizardUnit)u;
+                    b.Size = new Size(20, 20);
+                    b.Location = new Point(wu.Xpos * 20, wu.Ypos * 20);
+                    b.Text = wu.Symbol;
+                    b.ForeColor = Color.Black;
                 }
                 b.Click += Unit_Click;
                 groupBox.Controls.Add(b);

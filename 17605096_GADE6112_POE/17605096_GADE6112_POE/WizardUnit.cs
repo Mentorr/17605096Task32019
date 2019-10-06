@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _17605096_GADE6112_POE
-{ [Serializable]
-    class RangedUnit : Unit
+{
+    class WizardUnit : Unit
     {
         public bool IsDead { get; set; }
         public int Xpos
@@ -63,10 +63,7 @@ namespace _17605096_GADE6112_POE
             get { return base.name; }
             set { base.name = value; }
         }
-
-
-
-        public RangedUnit(int x, int y, int h, int s, int a, int ar, int f, string symb, string na)
+        public WizardUnit(int x, int y, int h, int s, int a, int ar, int f, string symb, string na)
         {
             Xpos = x;
             Ypos = y;
@@ -81,7 +78,6 @@ namespace _17605096_GADE6112_POE
             IsDead = false;
             Name = na;
         }
-
         public override void Death()
         {
             Symbol = "X";
@@ -189,8 +185,5 @@ namespace _17605096_GADE6112_POE
             temp += Name;
             return temp;
         }
-
-
     }
-
 }

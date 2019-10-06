@@ -19,6 +19,8 @@ namespace _17605096_GADE6112_POE
         Random r = new Random();
         List<Unit> units;
         Unit un;
+        ResourceBuilding rb;
+
         string output;
 
         public bool IsDead { get; set; }
@@ -62,7 +64,7 @@ namespace _17605096_GADE6112_POE
         }
 
 
-        public void UnitProduce()
+        public void UnitProduce(int genspeed)
         {
             int unitR = r.Next(0, 2);
             if(unitR == 1)
