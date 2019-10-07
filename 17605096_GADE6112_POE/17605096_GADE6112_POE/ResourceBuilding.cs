@@ -69,7 +69,7 @@ namespace _17605096_GADE6112_POE
 
             while(ResRem>=0)
             {
-                fb.UnitProduce(5);
+                fb.UnitProduce(5);          
             }
         }
         public override void Death()
@@ -88,7 +88,7 @@ namespace _17605096_GADE6112_POE
             temp += Health;
             temp += (IsDead ? "Destroyed" : "Active");
             return temp;
-        }
+        }                                                                       //to be used when clicked on
         public override void Save()
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -105,7 +105,7 @@ namespace _17605096_GADE6112_POE
             {
                 MessageBox.Show("Error Occured " + exc.Message);
             }
-        }
+        }                                                                       //save method
 
         public override void Combat(Unit other)
         {
@@ -122,7 +122,7 @@ namespace _17605096_GADE6112_POE
             {
                 Death();
             }
-        }
+        }                                                                       //wizards are exempt as they have no effect on resource buildings
         public override (Unit, int) Closest(List<Unit> units)
         {
             int shortest = 100;

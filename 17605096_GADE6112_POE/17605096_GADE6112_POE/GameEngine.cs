@@ -334,6 +334,18 @@ namespace _17605096_GADE6112_POE
                 WizardUnit end = (WizardUnit)b;
                 distance = Math.Abs(start.Xpos - end.Xpos) + Math.Abs(start.Ypos - end.Ypos);
             }
+            else if(a is WizardUnit && b is MeleeUnit)
+            {
+                WizardUnit start = (WizardUnit)a;
+                MeleeUnit end = (MeleeUnit)b;
+                distance = Math.Abs(start.Xpos - end.Xpos) + Math.Abs(start.Ypos - end.Ypos);
+            }
+            else if(a is WizardUnit && b is RangedUnit)
+            {
+                WizardUnit start = (WizardUnit)a;
+                RangedUnit end = (RangedUnit)b;
+                distance = Math.Abs(start.Xpos - end.Xpos) + Math.Abs(start.Ypos - end.Ypos);
+            }
             return distance;
         }
 

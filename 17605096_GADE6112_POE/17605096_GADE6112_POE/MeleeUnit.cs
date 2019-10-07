@@ -120,6 +120,11 @@ namespace _17605096_GADE6112_POE
                 RangedUnit ru = (RangedUnit)attacker;                   //if ATTACKER is RANGEDUNIT, minus HEALTH by ATTACKER'S ATTACK
                 Health = Health - (ru.Attack - ru.Attackrange);         //HEALTH is minused by (ATTACK DAMAGE - The range they are at)
             }
+            else if(attacker is WizardUnit)
+            {
+                WizardUnit wu = (WizardUnit)attacker;
+                Health = Health - (wu.Attack - wu.Attackrange);
+            }
             if (Health <= 0)
             {
                 Death();
@@ -140,6 +145,11 @@ namespace _17605096_GADE6112_POE
                 otherx = ((RangedUnit)Other).Xpos;
                 othery = ((RangedUnit)Other).Ypos;
             }
+            else if(Other is WizardUnit)
+            {
+                otherx = ((WizardUnit)Other).Xpos;
+                othery = ((RangedUnit)Other).Ypos;
+            }
 
             distance = Math.Abs(Xpos - otherx) + Math.Abs(Ypos - othery);
             if(distance <= Attackrange)
@@ -155,31 +165,42 @@ namespace _17605096_GADE6112_POE
         {
             int shortest = 100;
             Unit closest = this;
-            foreach(Unit u in units)
+            foreach (Unit u in units)
             {
-                if(u is MeleeUnit && u != this)
+                if (u is MeleeUnit && u != this)
                 {
                     MeleeUnit otherMU = (MeleeUnit)u;
                     int distance = Math.Abs(this.Xpos - otherMU.Xpos) + Math.Abs(this.Ypos = otherMU.Ypos);
-                    if(distance < shortest)
+                    if (distance < shortest)
                     {
-                        shortest = distance;;
+                        shortest = distance; ;
                         closest = otherMU;
                     }
                 }
-                else if(u is RangedUnit && u != this)
+                else if (u is RangedUnit && u != this)
                 {
-                    
-                        RangedUnit otherRU = (RangedUnit)u;
-                        int distance = Math.Abs(this.Xpos - otherRU.Xpos) + Math.Abs(this.Ypos - otherRU.Ypos);
 
-                        if(distance < shortest)
-                        {
-                            shortest = distance;
-                            closest = otherRU;
-                        }
-                    }  
+                    RangedUnit otherRU = (RangedUnit)u;
+                    int distance = Math.Abs(this.Xpos - otherRU.Xpos) + Math.Abs(this.Ypos - otherRU.Ypos);
+
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherRU;
+                    }
                 }
+                else if(u is WizardUnit && u != this)
+                {
+                    WizardUnit otherWU = (WizardUnit)u;
+                    int distance = Math.Abs(this.xpos - otherWU.Xpos) + Math.Abs(this.ypos - otherWU.Ypos);
+                    if(distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherWU;
+                    }
+                }
+            }
+            
             return (closest, shortest);
         }
         public override string ToString()

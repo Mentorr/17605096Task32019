@@ -115,7 +115,7 @@ namespace _17605096_GADE6112_POE
             }
             if (Health <= 0)
             {
-                Death();
+                Death();                                                        //Wizards ignored as they cannot harm each other
             }
         }
         public override bool InRange(Unit other)
@@ -170,7 +170,7 @@ namespace _17605096_GADE6112_POE
                         shortest = distance;
                         closest = otherRU;
                     }
-                }
+                }                                                                                               //does not take own wizardunits into account as wizards cannot harm one another
             }
             return (closest, shortest);
         }

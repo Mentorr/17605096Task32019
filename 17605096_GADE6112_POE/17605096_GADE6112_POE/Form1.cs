@@ -34,7 +34,7 @@ namespace _17605096_GADE6112_POE
         private void Timer1_Tick(object sender, EventArgs e)
         {
             lblRoundSim.Text = "Round: " + engine.RoundNum.ToString();
-            engine.Update(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text),temp);
+            engine.Update(Convert.ToInt32(txtX.Text), Convert.ToInt32(txtY.Text),temp);                                 //setting the size of the map
         }
         private void Form1_Load(object sender, EventArgs e)
         {

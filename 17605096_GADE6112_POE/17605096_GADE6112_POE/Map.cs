@@ -145,7 +145,7 @@ namespace _17605096_GADE6112_POE
                     {
                         b.ForeColor = Color.Green;
                     }
-                }
+                }                                                                   //MeleeUnit's spawn/display
                 else if (u is RangedUnit)
                 {
                     RangedUnit ru = (RangedUnit)u;
@@ -160,14 +160,27 @@ namespace _17605096_GADE6112_POE
                     {
                         b.ForeColor = Color.Green;
                     }
-                }
+                }                                                                   //RangedUnit's spawn/display
                 else if(u is WizardUnit)
                 {
                     WizardUnit wu = (WizardUnit)u;
                     b.Size = new Size(20, 20);
                     b.Location = new Point(wu.Xpos * 20, wu.Ypos * 20);
                     b.Text = wu.Symbol;
-                    b.ForeColor = Color.Black;
+                    if(wu.Faction == 0)
+                    {
+                        b.ForeColor = Color.Red;
+                    }
+                    else if(wu.Faction == 1)
+                    {
+                        b.ForeColor = Color.Green;                          //wizards can belong on both teams as well as an independent team (as the brief didn't say it had to be only an independent team)
+                    }
+                    else if(wu.Faction == 2)
+                    {
+                        b.ForeColor = Color.Aqua;                           //3rd team. Highly unlikely to spawn however unless max units on load is increased
+                    }
+                    
+                    
                 }
                 b.Click += Unit_Click;
                 groupBox.Controls.Add(b);
@@ -189,11 +202,12 @@ namespace _17605096_GADE6112_POE
                     {
                         b.ForeColor = Color.Green;
                     }
+
                 }
                 b.Click += Building_Click;
                 groupBox.Controls.Add(b);
                 groupBox.Controls.Add(b); groupBox.Controls.Add(b); groupBox.Controls.Add(b);
-            }
+            }                                                               //all buildings spawn
         }
 
         public void Unit_Click(object sender, EventArgs e)
@@ -223,6 +237,15 @@ namespace _17605096_GADE6112_POE
                         txtInfo.Text = mu.ToString();
                     }
                 }
+                else if (u is WizardUnit)
+                {
+                    WizardUnit wu = (WizardUnit)u;
+                    if (wu.Xpos == x && wu.Ypos == y)
+                    {
+                        txtInfo.Text = "";
+                        txtInfo.Text = wu.ToString();
+                    }
+                }
             }
             foreach(Building bu in buildings)
             {
@@ -234,6 +257,15 @@ namespace _17605096_GADE6112_POE
                         txtInfo.Text = "";
                         txtInfo.Text = fb.ToString();
                     }
+                }
+                else if(bu is ResourceBuilding)
+                {
+                    ResourceBuilding rb = (ResourceBuilding)bu;
+                    if(rb.Xpos == x && rb.Ypos == y)
+                    {
+                        txtInfo.Text = "";
+                        txtInfo.Text = rb.ToString();
+                    }                                                           //when a building is clicked, ToString is called
                 }
             }
         }
@@ -254,6 +286,15 @@ namespace _17605096_GADE6112_POE
                         txtInfo.Text = fb.ToString();
                     }
                 }
+                else if (bu is ResourceBuilding)
+                {
+                    ResourceBuilding rb = (ResourceBuilding)bu;
+                    if (rb.Xpos == x && rb.Ypos == y)
+                    {
+                        txtInfo.Text = "";
+                        txtInfo.Text = rb.ToString();
+                    }                                                           //when a building is clicked, ToString is called
+                }
             }
         }
         public void Save()
@@ -264,7 +305,7 @@ namespace _17605096_GADE6112_POE
             {
                 using (fout)
                 {
-                    bf.Serialize(fout, map);
+                    bf.Serialize(fout, map);                                                                        //save method for saving objects to file
                     MessageBox.Show("Info Saved");
                 }
             }
@@ -274,7 +315,7 @@ namespace _17605096_GADE6112_POE
             }
             catch (ArgumentNullException ex)
             {
-                MessageBox.Show("Error Occured " + ex.Message);
+                MessageBox.Show("Error Occured " + ex.Message);                                                     //if it cannot be saved, throw an error instead of crashing
             }
         }
     }
